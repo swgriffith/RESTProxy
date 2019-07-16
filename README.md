@@ -18,9 +18,9 @@ git clone https://github.com/swgriffith/RESTProxy.git
 ```
 
 ## Run the function
+
 1. From the command line navigate to the source directory and run:
 ```bash
 func start
 ```
-
-1. Send a web request to the endpoint using your prefered tool (i.e. Browser, [Postman](https://www.getpostman.com/))
+2. Send a web request to the endpoint using your prefered tool (i.e. Browser, [Postman](https://www.getpostman.com/))
