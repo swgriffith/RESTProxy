@@ -55,6 +55,7 @@ namespace RESTProxy
             using(var client = new HttpClient())
             {
                 //Build the request, adding a few sample header values and the content type, which is usually application/json for a REST call
+                //Note that if you're calling something that expects a Bearer token that is handled specially as shown below.
                 client.BaseAddress = new Uri(target_url);
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "insert_your_token_here");
