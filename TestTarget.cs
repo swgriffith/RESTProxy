@@ -19,6 +19,14 @@ namespace RESTProxy
         {
             try
             {
+                log.LogInformation("***Request Recieved***");
+                //Write out the HTTP Header values recieved
+                log.LogInformation("Headers:");
+                foreach(var header in req.Headers)
+                {
+                    log.LogInformation($"{header.Key} : {header.Value}");
+                }
+                log.LogInformation("***Sending Response***");
                 return (ActionResult)new OkObjectResult($"You sent, {date}");
             }
             catch(Exception ex)

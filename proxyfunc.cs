@@ -44,13 +44,27 @@ namespace RESTProxy
             //Note: the $ a the begining of the string lets you plug variables inline into the string
             log.LogInformation($"Last Month: {lastMonth.ToString("yyyyMM")}");
 
+
+            //Replace the {date} parameter in the URL string with the actual date to be passed
             target_url = target_url.Replace("{date}", lastMonth.ToString("yyyyMM"));
 
             string resultContent;
+
+            //This 'using' block basically makes sure that the client object is cleaned up
+            //after the code completes, so you dont have connections held open
             using(var client = new HttpClient())
             {
+                //Build the request, adding a few sample header values and the content type, which is usually application/json for a REST call
                 client.BaseAddress = new Uri(target_url);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", "insert_your_token_here");
+                client.DefaultRequestHeaders.Add("SOMEHEADER1","SomeData1");
+                client.DefaultRequestHeaders.Add("SOMEHEADER2","SomeData2");
+                
+                //Make the web request
                 var result = await client.GetAsync("");
+
+                //Read the response data into a string to be used later
                 resultContent = await result.Content.ReadAsStringAsync();
             }
 
